@@ -1,6 +1,19 @@
-<h1 class="text-3xl font-bold underline">{{title}}</h1>
-<ul>
-  @for(user of users; track user.id){
-  <li>{{user.id}} - {{user.userName}}</li>
-  }
-</ul>
+<div class="h-dvh flex flex-col bg-violet-50">
+  <app-nav></app-nav>
+  <app-home class="grow px-12 pt-12 container mx-auto bg-violet-100"></app-home>
+
+
+  <!--
+  <div class="grow px-12 pt-12 container mx-auto bg-violet-100">
+    <ul>
+      @for(user of users; track user.id){
+      <li>{{user.id}} - {{user.userName}}</li>
+      }
+    </ul>
+  </div>
+  -->
+  <footer class="container mx-auto flex justify-end items-center pe-4 text-xs h-12 bg-violet-200  text-violet-500">
+    <a href="https://www.5degres.com/" target="_blank" class="underline pe-1 hover:text-violet-800">5 Degrés SUD</a> &copy; 2025
+  </footer>
+</div>
+

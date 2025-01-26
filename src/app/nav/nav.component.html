@@ -1,0 +1,45 @@
+<header class="flex flex-wrap p-2 items-center justify-between w-full bg-violet-700 bg-gradient-to-b from-violet-600 to-violet-800">
+  <div class="flex items-center justify-start m-2">
+    <a class="flex items-center p-2 me-2 font-bold text-white" href="/">Around You</a>
+    @if(accountService.currentUser()) {
+      <ul class="flex content-center justify-start">
+        <li class="p-2 me-2 cursor-pointer text-white hover:bg-violet-600 rounded flex items-center"><a href="/">Matches</a></li>
+        <li class="p-2 me-2 cursor-pointer text-white hover:bg-violet-600 rounded flex items-center"><a href="/">Contacts</a></li>
+        <li class="p-2 me-2 cursor-pointer text-white hover:bg-violet-600 rounded flex items-center"><a href="/">Messages</a></li>
+      </ul>
+    }
+  </div>
+
+  @if(!accountService.currentUser()) {
+    <form #loginForm="ngForm" (ngSubmit)="login()" class="flex flex-col items-center justify-end" autocomplete="off">
+      <div class="flex">
+      <input name="username" [(ngModel)]="model.username" class="p-2 me-2 rounded outline-none text-violet-950" type="text" placeholder="Username">
+      <input name="password" [(ngModel)]="model.password" class="p-2 me-2 rounded outline-none text-violet-950" type="password" placeholder="Password">
+      <button class="p-2 me-2 bg-violet-900 text-white rounded w-20">Login</button>
+      </div>
+    </form>
+  }
+
+  @if(accountService.currentUser()) {
+    <div class="relative">
+      <div (click)="toggleDropdown()" class="w-[10rem] h-[3rem] bg-violet-600 border-solid border-violet-900 border px-4 py-2 rounded cursor-pointer font-bold flex justify-between items-center select-none">
+        <span class="text-white capitalize">{{accountService.currentUser()?.username}}</span>
+        <fa-icon class="text-white" [icon]="dropdownIcon"></fa-icon>
+      </div>
+      <ul class="absolute top-[3.3rem] right-0 rounded bg-white shadow-md w-[10rem] {{dropdownVisible ? 'block' : 'hidden'}}">
+        <li class="cursor-pointer hover:bg-violet-100 p-4 rounded">account</li>
+        <li class="cursor-pointer hover:bg-violet-100 p-4 rounded">settings</li>
+        <li class="cursor-pointer hover:bg-violet-100 p-4 rounded" (click)="logout()">
+          <button>logout</button>
+        </li>
+      </ul>
+    </div>
+  }
+</header>
+@if (error !== '') {
+  <div class="flex container mx-auto items-center justify-center p-2 bg-red-50 text-red-500">{{error}}
+    <button class="ms-3 w-6 h-6" type="button" (click)="resetError()">
+      <fa-icon [icon]="alertIconClose"></fa-icon>
+    </button>
+  </div>
+}
